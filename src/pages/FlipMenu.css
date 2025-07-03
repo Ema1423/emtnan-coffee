@@ -1,0 +1,112 @@
+/* الحاوية الرئيسية للصفحة */
+.flip-wrapper {
+  position: relative;
+  min-height: 100vh;
+  font-family: 'Georgia', serif;
+  color: #3b2f2f;
+  z-index: 1;
+
+  /* ➕ توسيط محتوى الكتاب */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* خلفية الفيديو */
+.background-video {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  z-index: -1;
+  opacity: 0.5;
+}
+
+/* أزرار التنقل */
+.menu-buttons {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  gap: 10px;
+  z-index: 10;
+}
+
+.menu-buttons button {
+  padding: 10px 14px;
+  background-color: #6b4f3f;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.menu-buttons button:hover {
+  background-color: #4f3a2f;
+}
+
+/* صفحة الكتاب */
+.page {
+  background: #fffef9;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 30px;
+  width: 100%;
+  height: 100%;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.page-content {
+  text-align: center;
+}
+
+.cover-page {
+  background: #f5efe3;
+}
+
+.end-page {
+  background: #f3f3f3;
+}
+
+/* تنسيق صور المنتجات */
+.product-image {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+
+/* تنسيق النصوص */
+.page h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.page p {
+  margin: 5px 0;
+}
+
+/* زر إضافة للسلة */
+.page button {
+  margin-top: 10px;
+  padding: 10px 16px;
+  background-color: #a9744f;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.page button:hover {
+  background-color: #8b5e3c;
+}

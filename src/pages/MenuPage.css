@@ -1,0 +1,48 @@
+/* src/pages/MenuPage.css */
+.menu-container {
+  background-image: url('../images/menu-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh;
+  padding: 50px 30px;
+  font-family: 'Georgia', serif;
+  color: #3b2f2f;
+}
+
+.menu-title {
+  font-size: 48px;
+  text-align: center;
+  margin-bottom: 30px;
+  font-weight: bold;
+}
+
+.menu-items {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.menu-card {
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 12px;
+  padding: 20px;
+  width: 250px;
+  text-align: center;
+  box-shadow: 0 0 10px #d9cfcf;
+  transition: transform 0.3s ease;
+}
+
+.menu-card:hover {
+  transform: scale(1.05);
+}
+
+.menu-card button {
+  margin-top: 10px;
+  padding: 8px 16px;
+  background-color: #a9744f;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}

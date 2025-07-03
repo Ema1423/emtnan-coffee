@@ -1,0 +1,89 @@
+.checkout-page {
+  padding: 2rem;
+  text-align: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.checkout-page h1 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.checkout-page p {
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+}
+
+.checkout-page button {
+  margin: 10px;
+  padding: 10px 18px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background-color: #795548;
+  color: white;
+  transition: background 0.3s;
+}
+
+.checkout-page button:hover {
+  background-color: #5d4037;
+}
+.invoice-print {
+  background: white;
+  border: 1px dashed #999;
+  padding: 20px;
+  margin-top: 20px;
+  width: 300px;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 14px;
+  color: #000;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.invoice-print h2 {
+  text-align: center;
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+.invoice-print hr {
+  border: none;
+  border-top: 1px dashed #999;
+  margin: 10px 0;
+}
+
+.invoice-print p {
+  margin: 4px 0;
+}
+.checkout-page button:last-child {
+  background-color: #444;
+  color: #fff;
+  margin-top: 10px;
+}
+
+.checkout-page button:last-child:hover {
+  background-color: #222;
+}
+@media print {
+  body * {
+    visibility: hidden;
+  }
+
+  #invoice, #invoice * {
+    visibility: visible;
+  }
+
+  #invoice {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    padding: 20px;
+    background: white;
+  }
+
+  .checkout-page button {
+    display: none !important;
+  }
+}
