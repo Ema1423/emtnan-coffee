@@ -12,16 +12,15 @@ function HomePage() {
       <div className="home">
 
         {/* ✅ الفيديو ثابت في الخلفية وما ينعرض fullscreen */}
-        <video 
-          autoPlay 
-          loop 
-          muted 
-          playsInline 
-          webkit-playsinline="true"
-          className="background-video"
-        >
-          <source src="/videos/coffee-rain.mp4" type="video/mp4" />
-        </video>
+        <video
+  autoPlay
+  loop
+  muted
+  playsInline
+  className="background-video"
+>
+  <source src="/videos/coffee-rain.mp4" type="video/mp4" />
+</video>
 
         {/* الطبقة فوق الفيديو */}
         <div className="overlay">
