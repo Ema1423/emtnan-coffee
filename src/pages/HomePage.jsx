@@ -11,27 +11,47 @@ function HomePage() {
     <PageTransition>
       <div className="home">
 
-        {/* ✅ الفيديو كخلفية */}
-        <video autoPlay loop muted className="background-video">
+        {/* ✅ الفيديو ثابت في الخلفية وما ينعرض fullscreen */}
+        <video 
+          autoPlay 
+          loop 
+          muted 
+          playsInline 
+          webkit-playsinline="true"
+          className="background-video"
+        >
           <source src="/videos/coffee-rain.mp4" type="video/mp4" />
-          Your browser does not support the video tag.
         </video>
 
+        {/* الطبقة فوق الفيديو */}
         <div className="overlay">
+
+          {/* Navbar */}
           <div className="navbar">
-            <div className="logo">Emtnan <span>Coffee</span></div>
+            <div className="logo">
+              Emtnan <span>Coffee</span>
+            </div>
+
             <div className="nav-buttons">
               <button onClick={() => navigate('/cart')}>🛒 Cart</button>
               <button onClick={() => navigate('/checkout')}>💳 Checkout</button>
             </div>
           </div>
 
+          {/* Welcome Section */}
           <div className="welcome">
             <h1>WELCOME</h1>
             <p>To Emtnan Coffee</p>
             <p className="slogan">Since 1990 – a legacy of taste and quality</p>
-            <button onClick={() => navigate('/flip-menu')} className="login-btn">ENTER</button>
+
+            <button 
+              onClick={() => navigate('/flip-menu')}
+              className="login-btn"
+            >
+              ENTER
+            </button>
           </div>
+
         </div>
       </div>
     </PageTransition>
