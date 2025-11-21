@@ -1,3 +1,4 @@
+// src/pages/CartPage.jsx
 import React, { useEffect, useState } from 'react';
 import PageTransition from '../components/PageTransition';
 import { useNavigate } from 'react-router-dom';
@@ -7,6 +8,7 @@ function CartPage() {
   const [cartItems, setCartItems] = useState([]);
   const navigate = useNavigate();
 
+  // 🔄 جلب السلة من الباك اند
   const fetchCart = () => {
     fetch('https://emtnan-coffee.onrender.com/cart')
       .then(res => res.json())
@@ -17,26 +19,8 @@ function CartPage() {
   useEffect(() => {
     fetchCart();
   }, []);
-  const handleCheckout = () => {
-  fetch('https://emtnan-coffee.onrender.com/checkout', {
-    method: 'POST',
-  })
-    .then(res => {
-      if (!res.ok) throw new Error('فشل الطلب');
-      return res.json();
-    })
-    .then(data => {
-      console.log("✅ الفاتورة:", data);
-      alert(`✅ تم تنفيذ الطلب بنجاح!\nالإجمالي: ${data.total} ريال`);
-      navigate('/');
-    })
-    .catch(err => {
-      console.error("❌ فشل تنفيذ الطلب:", err);
-      alert("❌ حدث خطأ أثناء تنفيذ الطلب");
-    });
-};
 
-
+  // ❌ حذف منتج
   const handleDelete = (index) => {
     fetch(`https://emtnan-coffee.onrender.com/cart/${index}`, {
       method: 'DELETE',
@@ -45,28 +29,33 @@ function CartPage() {
       .catch(err => console.error('فشل حذف المنتج:', err));
   };
 
+  // 🔢 تغيير الكمية
   const updateQuantity = (index, change) => {
-   
-
     const updatedItems = [...cartItems];
     const item = updatedItems[index];
     const newQty = (item.quantity || 1) + change;
     if (newQty < 1) return;
 
-    fetch('https://emtnan-coffee.onrender.com', {
+    fetch('https://emtnan-coffee.onrender.com/cart', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ id: item.id, quantity: newQty }),
+      body: JSON.stringify({ id: item.id, quantity: newQty, update: true }),
     })
       .then(() => fetchCart())
       .catch(err => console.error('فشل تحديث الكمية:', err));
   };
 
+  // 💰 حساب الإجمالي
   const totalPrice = cartItems.reduce((total, item) => {
     const price = parseFloat(item.price);
     const quantity = item.quantity || 1;
     return total + (isNaN(price) ? 0 : price * quantity);
   }, 0);
+
+  // ✅ الآن فقط ننتقل لصفحة الفاتورة
+  const handleCheckout = () => {
+    navigate('/checkout');
+  };
 
   return (
     <PageTransition>
@@ -107,13 +96,7 @@ function CartPage() {
             <p className="total"><strong>الإجمالي:</strong> {totalPrice.toFixed(2)} SAR</p>
 
             <div className="cart-buttons">
-              <button onClick={() => {
-              console.log("✅ الزر تم الضغط عليه");
-              handleCheckout();
-        }}>
-            إتمام الطلب
-            </button>
-
+              <button onClick={handleCheckout}>إتمام الطلب</button>
               <button onClick={() => navigate('/')}>الرجوع للرئيسية</button>
             </div>
           </>
