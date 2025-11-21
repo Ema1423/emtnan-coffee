@@ -1,23 +1,90 @@
 [
   {
     "id": 1,
-    "name": "Latte",
-    "price": 15,
-    "calories": 180,
-    "prep_time": "5 min"
+    "name": "Espresso",
+    "price": 12,
+    "calories": 10,
+    "prepTime": "5 min",
+    "image": "/images/espresso.jpg"
   },
   {
     "id": 2,
-    "name": "Cappuccino",
-    "price": 17,
-    "calories": 150,
-    "prep_time": "6 min"
+    "name": "V60 coffee",
+    "price": 12,
+    "calories": 18,
+    "prepTime": "5 min",
+    "image": "/images/v60.jpg"
   },
   {
     "id": 3,
-    "name": "Iced Spanish",
-    "price": 19,
-    "calories": 220,
-    "prep_time": "7 min"
+    "name": "Latte",
+    "price": 18,
+    "calories": 120,
+    "prepTime": "7 min",
+    "image": "/images/latte.jpg"
+  },
+  {
+    "id": 4,
+    "name": "Matcha",
+    "price": 21,
+    "calories": 150,
+    "prepTime": "8 min",
+    "image": "/images/matcha.jpg"
+  },
+  {
+    "id": 5,
+    "name": "Frappuccino",
+    "price": 31,
+    "calories": 81,
+    "prepTime": "10 min",
+    "image": "/images/frappuccino.jpg"
+  },
+  {
+    "id": 6,
+    "name": "Donute",
+    "price": 36,
+    "calories": 510,
+    "prepTime": "10 min",
+    "image": "/images/donute.jpg"
+  },
+  {
+    "id": 7,
+    "name": "Marble Cake",
+    "price": 50,
+    "calories": 520,
+    "prepTime": "45 min",
+    "image": "/images/marble-cake.jpg"
+  },
+  {
+    "id": 8,
+    "name": "Chocolate Brownie",
+    "price": 69,
+    "calories": 420,
+    "prepTime": "11 min",
+    "image": "/images/choco-brownie.jpg"
+  },
+  {
+    "id": 9,
+    "name": "French Berry Croissant",
+    "price": 51,
+    "calories": 620,
+    "prepTime": "40 min",
+    "image": "/images/croissant.jpg"
+  },
+  {
+    "id": 10,
+    "name": "Chocolate Cake",
+    "price": 25,
+    "calories": 352,
+    "prepTime": "12 min",
+    "image": "/images/choco-cake.jpg"
+  },
+  {
+    "id": 11,
+    "name": "Cheesecake",
+    "price": 25,
+    "calories": 320,
+    "prepTime": "10 min",
+    "image": "/images/cheesecake.jpg"
   }
 ]
