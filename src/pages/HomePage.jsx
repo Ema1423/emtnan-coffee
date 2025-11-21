@@ -11,18 +11,20 @@ function HomePage() {
     <PageTransition>
       <div className="home">
 
-        {/* ✅ الفيديو ثابت في الخلفية وما ينعرض fullscreen */}
+        {/* خلفية الفيديو الثابتة */}
         <video
-  autoPlay
-  loop
-  muted
-  playsInline
-  className="background-video"
->
-  <source src="/videos/coffee-rain.mp4" type="video/mp4" />
-</video>
+          autoPlay
+          loop
+          muted
+          playsInline
+          webkit-playsinline="true"
+          className="background-video"
+          controls={false}
+          style={{ pointerEvents: "none" }}
+        >
+          <source src="/videos/coffee-rain.mp4" type="video/mp4" />
+        </video>
 
-        {/* الطبقة فوق الفيديو */}
         <div className="overlay">
 
           {/* Navbar */}
@@ -37,7 +39,7 @@ function HomePage() {
             </div>
           </div>
 
-          {/* Welcome Section */}
+          {/* Welcome section */}
           <div className="welcome">
             <h1>WELCOME</h1>
             <p>To Emtnan Coffee</p>

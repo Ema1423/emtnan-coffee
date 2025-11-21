@@ -6,24 +6,27 @@
   overflow: hidden;
 }
 
-/* ✅ الفيديو كخلفية */
+/* ✅ الفيديو كخلفية ثابتة */
 .background-video {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
+
+  /* 🔥 تعديل مهم جداً للجوال */
+  width: 100%;
+  height: 100%;
+
   object-fit: cover;
   z-index: -1;
   opacity: 0.7;
 
+  /* يمنع انفصال الفيديو */
   pointer-events: none;
   -webkit-user-drag: none;
   -webkit-touch-callout: none;
-
-
 }
 
+/* طبقة الغطاء */
 .overlay {
   background-color: rgba(0, 0, 0, 0.6);
   height: 100%;
@@ -34,6 +37,7 @@
   justify-content: space-between;
 }
 
+/* Navbar */
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -50,11 +54,15 @@
   background: none;
   border: 1px solid white;
   color: white;
-  padding: 8% 12px;
+
+  /* ❌ هنا كان الخطأ الأكبر → % تسبب انهيار الصفحة */
+  padding: 8px 12px;
+
   cursor: pointer;
   border-radius: 4px;
 }
 
+/* Welcome text */
 .welcome {
   position: absolute;
   top: 45%;
@@ -63,7 +71,7 @@
   color: white;
 }
 
-/* ✅ حركة موجية للنص الرئيسي */
+/* حركة النص */
 @keyframes waveMove {
   0% {
     transform: translateX(-100vw) scale(1);
@@ -95,7 +103,7 @@
   direction: ltr;
 }
 
-/* ✅ النص المتشابك */
+/* النص المتشابك */
 .slogan {
   font-family: 'Great Vibes', cursive;
   font-size: 36px;
@@ -104,6 +112,7 @@
   letter-spacing: 1px;
 }
 
+/* زر الدخول */
 .login-btn {
   margin-top: 20px;
   padding: 10px 30px;
