@@ -8,7 +8,7 @@ function CartPage() {
   const navigate = useNavigate();
 
   const fetchCart = () => {
-    fetch('http://127.0.0.1:5000/cart')
+    fetch('https://emtnan-coffee.onrender.com/cart')
       .then(res => res.json())
       .then(data => setCartItems(data))
       .catch(err => console.error('فشل جلب السلة:', err));
@@ -18,7 +18,7 @@ function CartPage() {
     fetchCart();
   }, []);
   const handleCheckout = () => {
-  fetch('http://127.0.0.1:5000/checkout', {
+  fetch('https://emtnan-coffee.onrender.com/checkout', {
     method: 'POST',
   })
     .then(res => {
@@ -38,7 +38,7 @@ function CartPage() {
 
 
   const handleDelete = (index) => {
-    fetch(`http://127.0.0.1:5000/cart/${index}`, {
+    fetch(`https://emtnan-coffee.onrender.com/cart/${index}`, {
       method: 'DELETE',
     })
       .then(() => fetchCart())
@@ -53,7 +53,7 @@ function CartPage() {
     const newQty = (item.quantity || 1) + change;
     if (newQty < 1) return;
 
-    fetch('http://127.0.0.1:5000/update-quantity', {
+    fetch('https://emtnan-coffee.onrender.com', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ id: item.id, quantity: newQty }),

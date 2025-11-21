@@ -4,14 +4,14 @@ function FlipMenu() {
   const [products, setProducts] = useState([]);
 
  useEffect(() => {
-  fetch("http://127.0.0.1:5000/products")
+  fetch("https://emtnan-coffee.onrender.com/products")
     .then((res) => res.json())
     .then((data) => setProducts(data))
     .catch((error) => console.error("Error fetching products:", error));
 }, []);
 
 const addToCart = (item) => {
-  fetch("http://127.0.0.1:5000/cart", {
+  fetch("https://emtnan-coffee.onrender.com/cart", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

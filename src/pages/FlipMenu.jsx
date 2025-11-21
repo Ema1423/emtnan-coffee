@@ -101,7 +101,7 @@ function FlipMenu() {
   const navigate = useNavigate();
 
   const addToCart = (item) => {
-    fetch("http://127.0.0.1:5000/cart", {
+    fetch("https://emtnan-coffee.onrender.com/cart", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
