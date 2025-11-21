@@ -1,41 +1,121 @@
+import React, { useEffect, useState } from 'react';
 import PageTransition from '../components/PageTransition';
-import React, { useContext } from 'react';
-import { CartContext } from '../context/CartContext';
 import { useNavigate } from 'react-router-dom';
 import './CartPage.css';
 
 function CartPage() {
-  const { cart, removeFromCart } = useContext(CartContext);
+  const [cartItems, setCartItems] = useState([]);
   const navigate = useNavigate();
 
-  const totalPrice = cart.reduce((total, item) => {
-    const priceNumber = parseFloat(item.price);
-    return total + (isNaN(priceNumber) ? 0 : priceNumber * item.quantity);
+  const fetchCart = () => {
+    fetch('http://127.0.0.1:5000/cart')
+      .then(res => res.json())
+      .then(data => setCartItems(data))
+      .catch(err => console.error('فشل جلب السلة:', err));
+  };
+
+  useEffect(() => {
+    fetchCart();
+  }, []);
+  const handleCheckout = () => {
+  fetch('http://127.0.0.1:5000/checkout', {
+    method: 'POST',
+  })
+    .then(res => {
+      if (!res.ok) throw new Error('فشل الطلب');
+      return res.json();
+    })
+    .then(data => {
+      console.log("✅ الفاتورة:", data);
+      alert(`✅ تم تنفيذ الطلب بنجاح!\nالإجمالي: ${data.total} ريال`);
+      navigate('/');
+    })
+    .catch(err => {
+      console.error("❌ فشل تنفيذ الطلب:", err);
+      alert("❌ حدث خطأ أثناء تنفيذ الطلب");
+    });
+};
+
+
+  const handleDelete = (index) => {
+    fetch(`http://127.0.0.1:5000/cart/${index}`, {
+      method: 'DELETE',
+    })
+      .then(() => fetchCart())
+      .catch(err => console.error('فشل حذف المنتج:', err));
+  };
+
+  const updateQuantity = (index, change) => {
+   
+
+    const updatedItems = [...cartItems];
+    const item = updatedItems[index];
+    const newQty = (item.quantity || 1) + change;
+    if (newQty < 1) return;
+
+    fetch('http://127.0.0.1:5000/update-quantity', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id: item.id, quantity: newQty }),
+    })
+      .then(() => fetchCart())
+      .catch(err => console.error('فشل تحديث الكمية:', err));
+  };
+
+  const totalPrice = cartItems.reduce((total, item) => {
+    const price = parseFloat(item.price);
+    const quantity = item.quantity || 1;
+    return total + (isNaN(price) ? 0 : price * quantity);
   }, 0);
 
   return (
-    <PageTransition> {/* ✅ تغليف كامل الصفحة */}
-      <div className="cart-page">
-        <h1>Your Cart 🛒</h1>
-        {cart.length === 0 ? (
-          <p>Your cart is empty.</p>
+    <PageTransition>
+      <video autoPlay muted loop className="background-video">
+        <source src="/videos/coff.mp4" type="video/mp4" />
+      </video>
+
+      <div className="cart-page cart-content">
+        <h1>🛒 السلة</h1>
+
+        {cartItems.length === 0 ? (
+          <p>السلة فارغة حالياً.</p>
         ) : (
           <>
             <ul className="cart-list">
-              {cart.map((item, index) => (
+              {cartItems.map((item, index) => (
                 <li key={index} className="cart-item">
-                  <img src={item.image} alt={item.name} className="cart-image" />
+                  <img
+                    src={item.image || "/images/placeholder.jpg"}
+                    alt={item.name}
+                    className="cart-image"
+                  />
                   <div className="cart-details">
                     <strong>{item.name}</strong><br />
-                    {item.price} × {item.quantity} = {(parseFloat(item.price) * item.quantity).toFixed(2)} SAR
+                    {item.price} × {item.quantity || 1} = {(item.price * (item.quantity || 1)).toFixed(2)} SAR
+                    <p className="prep-time">⏱ {item.prep_time || '5 min'}</p>
+                    <div className="quantity-buttons">
+                      <button onClick={() => updateQuantity(index, -1)} className="qty-btn">-</button>
+                      <span className="qty-value">{item.quantity || 1}</span>
+                      <button onClick={() => updateQuantity(index, 1)} className="qty-btn">+</button>
+                    </div>
                   </div>
-                  <button className="remove-button" onClick={() => removeFromCart(index)}>❌</button>
+                  <button onClick={() => handleDelete(index)} className="remove-button">❌</button>
                 </li>
               ))}
             </ul>
-            <p><strong>Total:</strong> {totalPrice.toFixed(2)} SAR</p>
-            <button onClick={() => navigate('/checkout')}>Checkout</button>
-            <button onClick={() => navigate('/')}>Back to Home</button>
+
+            <p className="total"><strong>الإجمالي:</strong> {totalPrice.toFixed(2)} SAR</p>
+
+            <div className="cart-buttons">
+              <button onClick={() => {
+              console.log("✅ الزر تم الضغط عليه");
+              handleCheckout();
+        }}>
+            إتمام الطلب
+            </button>
+
+              <button onClick={() => navigate('/')}>الرجوع للرئيسية</button>
+            </div>
           </>
         )}
       </div>
